@@ -13,3 +13,89 @@ the following pattern in a 5×3 world.
 Another special case you need to consider is that of a world that is only
 one column wide or one row high.
 */
+
+import "turns";
+
+function BuildCheckerBoard(){
+	while(frontIsClear()){
+		buildOddRow();
+		buildEvenRow();
+	}
+}
+
+function buildOddRow(){
+	while(frontIsClear()){
+		putBeeper();
+		move();
+		if(frontIsBlocked()){
+			if(facingEast()){
+				turnLeft();
+			} else {
+				if(rightIsClear()){
+					turnRight();
+				}
+			}
+			if(frontIsClear()){
+				move(); 
+				putBeeper();
+			}
+		if(leftIsClear()){
+				turnLeft();
+			}	else {
+				turnRight();
+			}
+			if(frontIsClear()){
+				move();
+			}
+		}
+		move();
+	}	
+	putBeeper();
+	if(facingEast()){
+		turnLeft();
+	} else {
+		if(rightIsClear()){
+			turnRight();
+		}
+	}	
+	if(frontIsClear()){	
+		move();
+	}
+	if(rightIsBlocked()){
+		turnLeft();
+	} else {
+		turnRight();
+	}	
+}
+
+function buildEvenRow(){
+	while(frontIsClear()){
+		move();
+		putBeeper();
+		move();
+	}
+	if(facingEast()){
+		turnLeft();
+	} else {
+		if(rightIsClear()){
+			turnRight();
+		}
+	}	
+	move();
+	if(rightIsBlocked()){
+		turnLeft();
+	} else {
+		turnRight();
+	}	
+}
+
+/*function finishOddRow(){
+	move(); 
+	putBeeper();
+	if(leftIsClear()){
+		turnLeft();
+	} else {
+		turnRight();
+	}
+	move();
+}*/
