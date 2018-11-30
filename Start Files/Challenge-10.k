@@ -84,7 +84,7 @@ function buildRowNoBeeperStart(){
 
 
 
-
+/*
 function BuildCheckerBoard(){
 	while(frontIsClear()){
 		buildOddRow();
@@ -171,3 +171,4 @@ function buildEvenRow(){
 	}	
 }
 
+*/
