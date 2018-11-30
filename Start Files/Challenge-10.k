@@ -16,6 +16,75 @@ one column wide or one row high.
 
 import "turns";
 
+function CreateCheckerBoard(){
+	while(notFacingNorth()){
+			buildRowBeeperStart();
+			if(noBeepersPresent()){
+				putBeeper();
+				moveToNewRow();
+				buildRowNoBeeperStart();
+			}
+			moveToNewRow();
+	}
+}
+
+function buildRowBeeperStart(){
+	while(frontIsClear()){
+		putBeeper();
+		move();
+		if(frontIsClear()){
+			move();
+		} 
+	}
+}
+
+
+
+function moveToNewRow(){
+	if(facingEast()){
+		turnLeft();
+	} 
+	if(facingWest()){
+		turnRight();
+	}
+	move();
+	if(rightIsBlocked()){
+		turnLeft();
+	}
+	if(leftIsBlocked()){
+		turnRight();
+	}
+}
+
+function buildRowNoBeeperStart(){
+	while(frontIsClear()){
+		move();
+		putBeeper();
+		if(frontIsClear()){
+			move();
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function BuildCheckerBoard(){
 	while(frontIsClear()){
 		buildOddRow();
@@ -39,8 +108,11 @@ function buildOddRow(){
 				move(); 
 				putBeeper();
 			}
-		if(leftIsClear()){
+			if(leftIsClear()){
 				turnLeft();
+				if(rightIsBlocked()){
+					turnRight();
+				}
 			}	else {
 				turnRight();
 			}
@@ -48,9 +120,13 @@ function buildOddRow(){
 				move();
 			}
 		}
+		if(frontIsClear()){
 		move();
+		}
 	}	
-	putBeeper();
+	if(noBeepersPresent()){
+		putBeeper();
+	}
 	if(facingEast()){
 		turnLeft();
 	} else {
@@ -63,9 +139,13 @@ function buildOddRow(){
 	}
 	if(rightIsBlocked()){
 		turnLeft();
-	} else {
+		if(rightIsBlocked()){
+			turnRight();
+		}
+	} 
+	if(frontIsClear()){
 		turnRight();
-	}	
+	}
 }
 
 function buildEvenRow(){
@@ -80,8 +160,10 @@ function buildEvenRow(){
 		if(rightIsClear()){
 			turnRight();
 		}
-	}	
-	move();
+	}
+	if(frontIsClear()){
+		move();
+	}
 	if(rightIsBlocked()){
 		turnLeft();
 	} else {
@@ -89,13 +171,3 @@ function buildEvenRow(){
 	}	
 }
 
-/*function finishOddRow(){
-	move(); 
-	putBeeper();
-	if(leftIsClear()){
-		turnLeft();
-	} else {
-		turnRight();
-	}
-	move();
-}*/
